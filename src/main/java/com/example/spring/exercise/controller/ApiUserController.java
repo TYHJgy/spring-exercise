@@ -1,5 +1,3 @@
-/*
-*/
 package com.example.spring.exercise.controller;
 
 import com.example.spring.exercise.domain.User;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(path="/user")
 public class ApiUserController {
-    private User userName;
     private UserService userService;
 
     public UserService getUserService() {
@@ -24,14 +21,6 @@ public class ApiUserController {
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
-    }
-
-    public User getUserName() {
-        return userName;
-    }
-    //@Autowired
-    public void setUserName(User userName) {
-        this.userName = userName;
     }
 
     @GetMapping(path = "")
