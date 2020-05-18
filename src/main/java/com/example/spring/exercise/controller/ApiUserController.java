@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-//@Configuration
-//@ConfigurationProperties(prefix = "logging.file")
 @RequestMapping(path="/user")
 public class ApiUserController {
     private User userName;
