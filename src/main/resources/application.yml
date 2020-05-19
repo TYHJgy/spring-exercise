@@ -1,0 +1,6 @@
+server:
+  port: 9001
+my:
+  servers:
+    - dev.example.com
+    - another.example.com
