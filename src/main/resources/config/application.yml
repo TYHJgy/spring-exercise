@@ -2,4 +2,8 @@ my:
   servers:
     - dev.example.com
     - another.example.com
-
+---
+spring:
+  profiles: dev2
+server:
+  port: 8001
