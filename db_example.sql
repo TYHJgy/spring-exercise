@@ -2,7 +2,8 @@
 SQLyog Ultimate v8.32 
 MySQL - 5.7.29-log : Database - db_example
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
@@ -17,7 +18,6 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`db_example` /*!40100 DEFAULT CHARACTER 
 USE `db_example`;
 
 /*Table structure for table `tbl1` */
-
 DROP TABLE IF EXISTS `tbl1`;
 
 CREATE TABLE `tbl1` (
