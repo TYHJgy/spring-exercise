@@ -1,7 +1,10 @@
 package com.example.spring.exercise.dao;
 
+import com.example.spring.exercise.controller.ApiUserController;
 import com.example.spring.exercise.domain.User;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -10,8 +13,11 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class UserDao {
+    private final static Logger LOGGER = LoggerFactory.getLogger(ApiUserController.class);
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
@@ -32,7 +38,7 @@ public class UserDao {
              newActor.setUserName(resultSet.getString("userName"));
              newActor.setBirthday(resultSet.getString("birthday"));
              newActor.setUserId(resultSet.getString("userId"));
-             System.out.println(resultSet);
+             LOGGER.info("rowNum="+rowNum);
              return newActor;
          },userId);
          return user;
@@ -61,6 +67,11 @@ public class UserDao {
         MapSqlParameterSource msps = new MapSqlParameterSource();
         msps.addValue("UID",uid);
         return this.namedParameterJdbcTemplate.update(sql, msps);
+    }
+
+    public List<User> selectAllUser() {
+        String sql = "SELECT * FROM tbl1";
+        return namedParameterJdbcTemplate.query(sql,new BeanPropertyRowMapper<>(User.class));
     }
 
 }
