@@ -7,12 +7,154 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.Pattern;
 
 @RestController
 @RequestMapping(path="/test")
 public class testController {
     private final static Logger LOGGER = LoggerFactory.getLogger(ApiUserController.class);
+
+    private static int i=0;
+    public static int getI() {
+        return i;
+    }
+    public void setI(int i) {
+        this.i = i;
+    }
+
+    //静态方法
+    @GetMapping("testStaticFun")
+    public static int testStaticFun(){
+        System.out.println("testStaticFun"+getI());
+        return 0;
+    }
+    //正则表达式
+    @GetMapping("testPattern")
+    public void testPattern(){
+        String content = "I am noob from runoob.com.";
+        String pattern = ".*runoob*";
+        boolean isMatch = Pattern.matches(pattern, content);
+        System.out.println("字符串中是否包含了 'runoob' 子字符串? " + isMatch);
+    }
+
+    //字符串替换
+    @GetMapping("testReplaceChar")
+    public void testReplaceChar(){
+        String str="Hello World，Hello World";
+        System.out.println( str.replace( 'H','W' ) );
+        str="Hello World，Hello World";
+        System.out.println( str.replaceFirst("He", "Wa") );
+        str="Hello World，Hello World";
+        System.out.println( str.replaceAll("He", "Ha") );
+    }
+
+    //删除字符串中的一个元素
+    @GetMapping("testDeleteCharFromString")
+    public int testDeleteCharFromString(String args[]) {
+        String str = "this is Java";
+        System.out.println(removeCharAt(str, 3));
+        return 0;
+    }
+    public String removeCharAt(String s, int pos) {
+        return s.substring(0, pos) + s.substring(pos + 1);
+    }
+
+    //数组排序及元素查找
+    @GetMapping("testArraySort")
+    public int testArraySort() throws Exception {
+        int array[] = { 2, 5, -2, 6, -3, 8, 0, -7, -9, 4 };
+        System.out.println(array);
+        Arrays.sort(array);
+        System.out.println(array);
+        printArray("数组排序结果为", array);
+        int index = Arrays.binarySearch(array, 2);
+        System.out.println("元素 2  在第 " + index + " 个位置");
+        return 0;
+    }
+    private void printArray(String message, int array[]) {
+        System.out.println(message
+                + ": [length: " + array.length + "]");
+        for (int i = 0; i < array.length; i++) {
+            if(i != 0){
+                System.out.print(", ");
+            }
+            System.out.print(array[i]);
+        }
+        System.out.println();
+    }
+
+
+    //字符串操作
+    @GetMapping("testString")
+    public int testString(){
+        String string = "123";
+        //字符串转整形
+        int i = Integer.valueOf(string);
+        System.out.println("字符串转整形："+ (i+100));
+        char[] c = string.toCharArray();
+        System.out.println("字符串转字符数组："+ c);
+        String Str = "www.runoob.com";
+        System.out.print("返回值 :" );
+        System.out.println( Str.toCharArray() );
+
+
+        String Str1 = "0字符串转字节0";
+        try{
+            byte[] Str2 = Str1.getBytes();
+            for (byte b: Str2) {
+                System.out.print(b+" ");
+            }
+            System.out.println("返回值：" + Str2 );
+            Str2 = Str1.getBytes( "UTF-8" );
+            for (byte b: Str2) {
+                System.out.print(b+" ");
+            }
+            System.out.println("(UTF-8)返回值：" + Str2 );
+
+            Str2 = Str1.getBytes( "Unicode" );
+            for (byte b: Str2) {
+                System.out.print(b+" ");
+            }
+            System.out.println("(Unicode)返回值：" + Str2 );
+
+            Str2 = Str1.getBytes( "GB2312" );
+            for (byte b: Str2) {
+                System.out.print(b+" ");
+            }
+            System.out.println("(GB2312)返回值：" + Str2 );
+        } catch ( UnsupportedEncodingException e){
+            System.out.println("不支持的字符集");
+        }
+
+        return 0;
+    }
+    //测试格式化时间
+    @GetMapping(path="time")
+    public int mytime(){
+        Date date = new Date();
+        System.out.println(date.toString());
+        System.out.println(date.getTime());//返回自 1970 年 1 月 1 日 00:00:00 GMT 以来此 Date 对象表示的毫秒数。
+        String strDateFormat = "yyyy-MM-dd HH:mm:ss.SSS";
+        SimpleDateFormat sdf = new SimpleDateFormat(strDateFormat);
+        System.out.println(sdf.format(date));
+        return 0;
+    }
+    //时间戳
+    @GetMapping("tesTimestamp")
+    public void tesTimestamp(){
+        Long timeStamp = System.currentTimeMillis();  //获取当前时间戳
+        System.out.println("时间戳：" + timeStamp);
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String sd = sdf.format(new Date(Long.parseLong(String.valueOf(timeStamp))));      // 时间戳转换成时间
+        System.out.println("格式化结果：" + sd);
+
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy 年 MM 月 dd 日 HH 时 mm 分 ss 秒");
+        String sd2 = sdf2.format(new Date(Long.parseLong(String.valueOf(timeStamp))));
+        System.out.println("格式化结果：" + sd2);
+    }
 
     //测试泛型
     @GetMapping(path="1")

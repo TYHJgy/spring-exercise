@@ -31,23 +31,23 @@ public class ApiUserController {
         User user = userService.getUserByUserId(userId);
         return new ResponseEntity(user,HttpStatus.OK);
     }
-
-    @GetMapping(path="all")
-    public List<User> getAllUser(){
-        return userService.getAllUser();
-    }
-
     //{userId}和String userId中userId,要匹配
-    @RequestMapping("/{userId}")
-    public User getUserByUserId2(@PathVariable String userId){
-        LOGGER.info("getUserByUserId2");
-        return userService.getUserByUserId(userId);
-    }
     @GetMapping("/{userId}")
     public User getUserByUserId3(@PathVariable String userId){
         LOGGER.info("getUserByUserId3");
         return userService.getUserByUserId(userId);
     }
+    @GetMapping(path="all")
+    public List<User> getAllUser(){
+        return userService.getAllUser();
+    }
+
+    @RequestMapping("/{userId}")
+    public User getUserByUserId2(@PathVariable String userId){
+        LOGGER.info("getUserByUserId2");
+        return userService.getUserByUserId(userId);
+    }
+
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
