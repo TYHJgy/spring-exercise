@@ -6,4 +6,6 @@ my:
 spring:
   profiles: dev2
 server:
-  port: 8001
+  port: 8002
+  resources:
+  static-locations: classpath:static/
