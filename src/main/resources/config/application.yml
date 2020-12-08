@@ -1,11 +1,13 @@
 my:
   servers:
-    - dev.example.com
-    - another.example.com
+    - dev.example.com3
+    - another.example.com3
 ---
 spring:
   profiles: dev2
 server:
-  port: 8002
-  resources:
-  static-locations: classpath:static/
+  port: 8003
+my:
+  servers:
+    - dev.example.com
+    - another.example.com

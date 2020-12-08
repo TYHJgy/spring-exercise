@@ -1,5 +1,5 @@
 my:
   servers:
-    - dev.example.com
-    - another.example.com
+    - devexamplecom2
+    - anotherexamplecom2
 

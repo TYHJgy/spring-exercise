@@ -1,6 +1,9 @@
 package com.example.spring.exercise.controller;
 
 import com.example.spring.exercise.domain.User;
+import com.example.spring.exercise.enums.TestEnum;
+import com.example.spring.exercise.enums.TestEnum2;
+import com.example.spring.exercise.enums.TestEnum3;
 import com.example.spring.exercise.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +33,19 @@ public class ApiUserController {
     public ResponseEntity getUserByUserId(@RequestParam(value = "userId", defaultValue = "3") String userId){
         User user = userService.getUserByUserId(userId);
         return new ResponseEntity(user,HttpStatus.OK);
+    }
+    @GetMapping(path = "/testEnum")
+    public TestEnum  testEnum(){
+        for (TestEnum we : TestEnum.values()) {
+            LOGGER.info("TestEnum:"+ we.toString());
+        }
+        for (TestEnum2 we : TestEnum2.values()) {
+            LOGGER.info("TestEnum2:"+ we.toString()+ " "+we.getName()+ " "+we.getYear());
+        }
+        for (TestEnum3 we : TestEnum3.values()) {
+            LOGGER.info("TestEnum3:"+ we.getName());
+        }
+        return TestEnum.BLUE;
     }
     //{userId}和String userId中userId,要匹配
     @GetMapping("/{userId}")

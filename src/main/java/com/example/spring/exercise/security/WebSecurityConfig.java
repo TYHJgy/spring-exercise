@@ -12,7 +12,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
-@Configuration
+import javax.swing.*;
+
+@Configuration //@Configuration声明当前类是一个配置类，相当于 Spring 中的一个 XML 文件
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -30,7 +32,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.logout()
 				.permitAll();
 	}
-	@Bean
+
+	@Bean //@Bean作用在方法上，声明当前方法的返回值是一个 Bean
 	@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
@@ -49,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				User.withDefaultPasswordEncoder()
 						.username("user2")
 						.password("p")
-						.roles("USER")
+						.roles("USER2")
 						.build();
 		return new InMemoryUserDetailsManager(user,user2);
 	}

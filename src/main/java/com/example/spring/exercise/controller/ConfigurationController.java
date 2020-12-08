@@ -1,6 +1,6 @@
 package com.example.spring.exercise.controller;
-
 import com.example.spring.exercise.configuration.YamlConfig;
+import com.example.spring.exercise.configuration.testConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.sql.DataSourceDefinition;
 import java.util.ArrayList;
 import java.util.List;
-
+//import lombok.Data;
 @RestController
 @RequestMapping("/config")
 @ConfigurationProperties(prefix="my.config") //前缀为"my.config"的配置。
+//@Data//@Data可以为类提供读写功能，从而不用写get、set方法。
 public class ConfigurationController {
 
     private String name;    //配置在"application.properties"中 name=gy，前缀不是"my.config"，结果为null
@@ -32,24 +34,42 @@ public class ConfigurationController {
     @Autowired
     private YamlConfig yamlConfig; //配置文件"application.yml"的配置操作
 
+    @Autowired
+    private testConfiguration testConfig;
+
+
+    public testConfiguration getTestConfig() {
+        return testConfig;
+    }
+
+    public void setTestConfig(testConfiguration testConfig) {
+        this.testConfig = testConfig;
+    }
+
     public String getName() {
         return name;
     }
+
     public String getName2() {
         return name2;
     }
+
     public String getRandom() {
         return random;
     }
+
     public String getName4() {
         return name4;
     }
+
     public String getName3() {
         return name3;
     }
+
     public YamlConfig getYamlConfig() {
         return yamlConfig;
     }
+
     public List<String> getServers() {
         return this.servers;
     }
@@ -57,37 +77,49 @@ public class ConfigurationController {
     public void setYamlConfig(YamlConfig yamlConfig) {
         this.yamlConfig = yamlConfig;
     }
+
     public void setRandom(String random) {
         this.random = random;
     }
+
     public void setName2(String name2) {
         this.name2 = name2;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public void setName3(String name3) {
         this.name3 = name3;
     }
+
     public void setName4(String name4) {
         this.name4 = name4;
     }
 
     @GetMapping("")
-    public String getConfigPara(){
-        return getName()+" "+getName2()+" "+getName3()+" "+getName4();
+    public String getConfigPara() {
+        return getName() + " " + getName2() + " " + getName3() + " " + getName4();
     }
+
     @GetMapping("/random")
-    public String getConfigParaRandom(){
+    public String getConfigParaRandom() {
         return getRandom();
     }
+
     @GetMapping("/yaml")
-    public List<String> getYamlVal(){
+    public List<String> getYamlVal() {
         return yamlConfig.getServers();
     }
+
     @GetMapping("/properties")
-    public List<String> getPropertiesVal(){
+    public List<String> getPropertiesVal() {
         return getServers();
     }
 
+    @GetMapping("1")
+    public String getString(){
+        return getTestConfig().getString();
+    }
 }

@@ -6,17 +6,18 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
 
 @RestController
 @RequestMapping(path="/security")
 public class securityController{
-    @GetMapping()
+    @GetMapping("user")
     @PreAuthorize("hasRole('USER')")
     public int testSecurity(){
-        return 0;
+        return 1;
     }
-
+    @GetMapping("user2")
+    @PreAuthorize("hasRole('USER2')")
+    public int testSecurity2(){
+        return 2;
+    }
 }
