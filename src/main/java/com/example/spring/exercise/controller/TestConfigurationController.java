@@ -4,22 +4,19 @@ import com.example.spring.exercise.configuration.testConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.sql.DataSourceDefinition;
 import java.util.ArrayList;
 import java.util.List;
+
 //import lombok.Data;
 @RestController
 @RequestMapping("/config")
 @ConfigurationProperties(prefix="my.config") //前缀为"my.config"的配置。
 //@Data//@Data可以为类提供读写功能，从而不用写get、set方法。
-public class ConfigurationController {
+public class TestConfigurationController {
 
     private String name;    //配置在"application.properties"中 name=gy，前缀不是"my.config"，结果为null
     @Value("${name}")

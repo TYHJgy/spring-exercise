@@ -14,8 +14,8 @@ import java.util.regex.Pattern;
 
 @RestController
 @RequestMapping(path="/test")
-public class testController {
-    private final static Logger LOGGER = LoggerFactory.getLogger(ApiUserController.class);
+public class TestJavaSEController {
+    private final static Logger LOGGER = LoggerFactory.getLogger(TestJavaSEController.class);
 
     private static int i=0;
     public static int getI() {
@@ -97,7 +97,7 @@ public class testController {
         names2.add("Baidu ");
         names2.add("Sina ");
 
-        testController tester = new testController();
+        TestJavaSEController tester = new TestJavaSEController();
 
         System.out.println("使用 Java 7 语法: ");
         tester.sortUsingJava7(names1);
@@ -126,7 +126,7 @@ public class testController {
     public void testSYH() {
         List<String> list = Arrays.asList("aaaa", "bbbb", "cccc");
         //对象实例语法	instanceRef::methodName
-        list.forEach(new testController()::print);
+        list.forEach(new TestJavaSEController()::print);
     }
     public void print(String content){
         System.out.println(content);

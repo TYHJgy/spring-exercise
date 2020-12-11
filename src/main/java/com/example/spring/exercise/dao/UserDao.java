@@ -14,7 +14,7 @@ import java.util.List;
 
 @Repository
 public class UserDao {
-    private final static Logger LOGGER = LoggerFactory.getLogger(ApiUserController.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(UserDao.class);
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
