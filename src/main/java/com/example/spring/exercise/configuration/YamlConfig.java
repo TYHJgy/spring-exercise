@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Configuration
+@Configuration
 @ConfigurationProperties(prefix="my")
 public class YamlConfig {
     private List<String> servers = new ArrayList<String>();
