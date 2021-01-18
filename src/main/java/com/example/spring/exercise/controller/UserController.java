@@ -29,6 +29,7 @@ public class UserController {
         this.userService = userService;
     }
 
+    //示例：http://localhost:8003/user?userId=1
     @GetMapping(path = "")
     public ResponseEntity getUserByUserId(@RequestParam(value = "userId", defaultValue = "3") String userId){
         User user = userService.getUserByUserId(userId);
@@ -48,6 +49,7 @@ public class UserController {
         return TestEnum.BLUE;
     }
     //{userId}和String userId中userId,要匹配
+    //示例：http://localhost:8003/user/1
     @GetMapping("/{userId}")
     public User getUserByUserId3(@PathVariable String userId){
         LOGGER.info("getUserByUserId3");
@@ -63,7 +65,6 @@ public class UserController {
         LOGGER.info("getUserByUserId2");
         return userService.getUserByUserId(userId);
     }
-
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)

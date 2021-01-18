@@ -28,7 +28,7 @@ public class UserDao {
     }
 
      public User selectUserByUserId(String userId) {
-         String sql = "SELECT * FROM tbl1 WHERE userId = ?";
+         String sql = "SELECT * FROM user WHERE userId = ?";
          User user = jdbcTemplate.queryForObject(sql,(resultSet, rowNum) -> {
                      User newActor = new User();
              newActor.setAge(resultSet.getString("age"));
@@ -41,7 +41,7 @@ public class UserDao {
          return user;
     }
     public int insertUser(User user) {
-        String sql = "INSERT INTO tbl1 (userName,age,birthday) VALUES (:USERNAME,:AGE,:BIRTHDAY)";
+        String sql = "INSERT INTO user (userName,age,birthday) VALUES (:USERNAME,:AGE,:BIRTHDAY)";
         MapSqlParameterSource msps = new MapSqlParameterSource();
         msps.addValue("USERNAME", user.getUserName());
         msps.addValue("AGE", user.getAge());
@@ -50,7 +50,7 @@ public class UserDao {
     }
 
     public int updateUser(User user) {
-        String sql = "UPDATE tbl1 SET userName = :USERNAME , age = :AGE , birthday = :BIRTHDAY WHERE `userId` = :UID";
+        String sql = "UPDATE user SET userName = :USERNAME , age = :AGE , birthday = :BIRTHDAY WHERE `userId` = :UID";
         MapSqlParameterSource msps = new MapSqlParameterSource();
         msps.addValue("USERNAME", user.getUserName());
         msps.addValue("AGE", user.getAge());
@@ -60,14 +60,14 @@ public class UserDao {
     }
 
     public int deleteUser(String uid){
-        String sql = "DELETE FROM tbl1 WHERE userId = :UID";
+        String sql = "DELETE FROM user WHERE userId = :UID";
         MapSqlParameterSource msps = new MapSqlParameterSource();
         msps.addValue("UID",uid);
         return this.namedParameterJdbcTemplate.update(sql, msps);
     }
 
     public List<User> selectAllUser() {
-        String sql = "SELECT * FROM tbl1";
+        String sql = "SELECT * FROM user";
         return namedParameterJdbcTemplate.query(sql,new BeanPropertyRowMapper<>(User.class));
     }
 
