@@ -30,10 +30,16 @@ public class UserController {
     }
 
     //示例：http://localhost:8003/user?userId=1
-    @GetMapping(path = "")
-    public ResponseEntity getUserByUserId(@RequestParam(value = "userId", defaultValue = "3") String userId){
-        User user = userService.getUserByUserId(userId);
-        return new ResponseEntity(user,HttpStatus.OK);
+    @GetMapping(path = "")//, defaultValue = "3"
+    public ResponseEntity getUserByUserId(@RequestParam(value = "userId",defaultValue = "") String userId){
+        LOGGER.info("getUserByUserId+"+userId);
+        if(userId!=""){
+            User user = userService.getUserByUserId(userId);
+            return new ResponseEntity(user,HttpStatus.OK);
+        }else{
+            List<User> users = userService.getAllUser();
+            return new ResponseEntity(users,HttpStatus.OK);
+        }
     }
     @GetMapping(path = "/testEnum")
     public TestEnum  testEnum(){
@@ -72,7 +78,15 @@ public class UserController {
         userService.insertUserTotTab(user);
         return new ResponseEntity( HttpStatus.OK);
     }
-
+    //登录-从数据库读取信息验证
+    @PostMapping("/testLogin")
+    public ResponseEntity testLogin(@RequestParam("username") String username,@RequestParam("password") String password) {
+        LOGGER.info("enter testLogin");
+        //@RequestBody String username,@RequestBody String password
+        LOGGER.info(username);
+        LOGGER.info(password);
+        return new ResponseEntity( HttpStatus.OK);
+    }
     @PutMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     public void updateUserbyId(@RequestBody User user){

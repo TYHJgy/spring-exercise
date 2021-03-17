@@ -11,11 +11,13 @@ class ExerciseApplicationTestThread {
      * */
     @Test
     void CreateThread() throws InterruptedException {
-        MyThread myThread = new MyThread();
         MyThread myThread2 = new MyThread();
-        myThread.start();
-        myThread.join();
+        MyThread myThread = new MyThread();
+
         myThread2.run();
+        System.out.println("==========================");
+        myThread.start();
+        //myThread.join();
     }
 
 }
