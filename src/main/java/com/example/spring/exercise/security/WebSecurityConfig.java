@@ -44,7 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                     //无需登录的url
-                    .antMatchers("/*", "/home", "/user/*","/user/testLogin").permitAll()
+                    .antMatchers("/config/*", "/home/*", "/user/*","/user/testLogin/*").permitAll()
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
