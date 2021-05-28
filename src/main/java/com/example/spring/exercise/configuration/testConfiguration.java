@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Configuration
 @EnableConfigurationProperties(YamlConfig.class)
 @Data
-public class TestConfiguration {
+public class testConfiguration {
     @Autowired
     private YamlConfig yamlConfig;
 

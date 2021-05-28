@@ -14,11 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- *
- *
- *
- */
+
 @RestController
 @RequestMapping(path="/user")
 public class UserController {
@@ -35,19 +31,14 @@ public class UserController {
 
     //示例：http://localhost:8003/user?userId=1
     @GetMapping(path = "")//, defaultValue = "3"
-    public ResponseEntity getUserByUserId(@RequestParam(value = "userId",defaultValue = "1") String userId){
+    public ResponseEntity getUserByUserId(@RequestParam(value = "userId",defaultValue = "") String userId){
         LOGGER.info("getUserByUserId+"+userId);
         if(userId!=""){
-            Integer aaa = 10;
-            aaa.equals(aaa);
-            String sss = "123456";
-            sss.equals(sss);
             User user = userService.getUserByUserId(userId);
-            user.equals(user);
             return new ResponseEntity(user,HttpStatus.OK);
         }else{
             List<User> users = userService.getAllUser();
-            return new ResponseEntity(users,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(users,HttpStatus.OK);
         }
     }
     @GetMapping(path = "/testEnum")
