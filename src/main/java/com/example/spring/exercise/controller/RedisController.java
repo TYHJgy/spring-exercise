@@ -10,7 +10,7 @@ import javax.xml.ws.soap.Addressing;
 
 @RestController
 @RequestMapping(path="/testRedis")
-public class TestRedisController {
+public class RedisController {
 
     @Autowired
     private TestRedisService testRedisService;

@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/config")
 @ConfigurationProperties(prefix = "my.config") // 前缀为"my.config"的配置。
 @Data
-public class TestConfigurationController {
+public class ConfigurationController {
 
   /** 配置在"application.properties"中 name=gy，前缀不是"my.config"，结果为null. */
   private String name;

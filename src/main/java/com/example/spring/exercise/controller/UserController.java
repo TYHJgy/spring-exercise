@@ -38,10 +38,7 @@ public class UserController {
     public ResponseEntity getUserByUserId(@RequestParam(value = "userId",defaultValue = "1") String userId){
         LOGGER.info("getUserByUserId+"+userId);
         if(userId!=""){
-            Integer aaa = 10;
-            aaa.equals(aaa);
-            String sss = "123456";
-            sss.equals(sss);
+
             User user = userService.getUserByUserId(userId);
             user.equals(user);
             return new ResponseEntity(user,HttpStatus.OK);
