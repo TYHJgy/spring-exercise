@@ -5,7 +5,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.*;
 
-/*JAVA中有许多的集合，常用的有List(ArrayList/LinkedList)，Set(HashSet/TreeSet)，Queue，Map(HashMap/TreeMap)*/
+/**
+ * JAVA中有许多的集合，常用的有List(ArrayList/LinkedList)，Set(HashSet/TreeSet)，Queue，Map(HashMap/TreeMap)
+ * java集合的由来：
+ * 在Java2之前，java是没有完整的集合框架的，它只有一些简单的可以自扩展的容器类，比如Vector，Stack，Hashtable等。
+ */
+
 
 /*
 1.ArrayList是实现了基于动态数组的数据结构，LinkedList基于链表的数据结构。
@@ -109,4 +114,5 @@ class ExerciseApplicationTestCollection {
         System.out.println("删除后:"+sites);
         System.out.println("集合大小:"+sites.size());   //计算大小
     }
+
 }
