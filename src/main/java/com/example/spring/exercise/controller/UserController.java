@@ -32,7 +32,6 @@ public class UserController {
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
-
     //示例：http://localhost:8003/user?userId=1
     @GetMapping(path = "")//, defaultValue = "3"
     public ResponseEntity getUserByUserId(@RequestParam(value = "userId",defaultValue = "1") String userId){
