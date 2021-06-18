@@ -1,7 +1,7 @@
 package com.example.spring.exercise.thread;
 
 import lombok.SneakyThrows;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
@@ -17,7 +17,16 @@ class ExerciseApplicationTestThread {
         myThread2.run();
         System.out.println("==========================");
         myThread.start();
+
         //myThread.join();
+    }
+
+    @Test
+    void test(){
+        ThreadLocal<String> localName = new ThreadLocal();
+        localName.set("张三");
+        String name = localName.get();
+        localName.remove();
     }
 
 }

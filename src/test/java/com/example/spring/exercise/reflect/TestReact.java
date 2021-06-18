@@ -8,6 +8,9 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+/**
+ * 反射.
+ */
 @SpringBootTest
 class ReflectClass {
     private static final Logger log = LoggerFactory.getLogger(ReflectClass.class);
