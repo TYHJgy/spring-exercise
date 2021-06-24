@@ -1,17 +1,19 @@
 package com.example.spring.exercise.enums;
 
 public enum TestEnum3 implements BaseEnum {
-    RED, GREEN, BLUE;
-    private String name;
-    private String val;
-    @Override
-    public String getName() {
+  RED, GREEN, BLUE;
+  private String name;
+  private String val;
 
-        return name;
-    }
-    @Override
-    public String getVal() {
+  @Override
+  public String getName() {
 
-        return val;
-    }
+    return name;
+  }
+
+  @Override
+  public String getVal() {
+
+    return val;
+  }
 }

@@ -6,21 +6,23 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TestRedisDao {
-    private StringRedisTemplate template;
 
-    public StringRedisTemplate getTemplate() {
-        return template;
-    }
-    @Autowired
-    public void setTemplate(StringRedisTemplate template) {
-        this.template = template;
-    }
+  private StringRedisTemplate template;
 
-    public void saveData(){
-        template.opsForValue().set("test1","ttteeesssttt");
-    }
+  public StringRedisTemplate getTemplate() {
+    return template;
+  }
 
-    public String getSaveData() {
-        return template.opsForValue().get("test1");
-    }
+  @Autowired
+  public void setTemplate(StringRedisTemplate template) {
+    this.template = template;
+  }
+
+  public void saveData() {
+    template.opsForValue().set("test1", "ttteeesssttt");
+  }
+
+  public String getSaveData() {
+    return template.opsForValue().get("test1");
+  }
 }

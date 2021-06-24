@@ -23,43 +23,45 @@ import javax.swing.*;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-	private final static Logger LOGGER = LoggerFactory.getLogger(WebSecurityConfig.class);
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http
-			.authorizeRequests()
-				.antMatchers("/", "/home").permitAll()
-				.anyRequest().authenticated()
-				.and()
-			.formLogin()
-				.loginPage("/login")
-				.permitAll()
-				.and()
-			.logout()
-				.permitAll();
-	}
 
-	@Bean //@Bean作用在方法上，声明当前方法的返回值是一个 Bean
-	@Override
-	public AuthenticationManager authenticationManagerBean() throws Exception {
-		return super.authenticationManagerBean();
-	}
+  private final static Logger LOGGER = LoggerFactory.getLogger(WebSecurityConfig.class);
 
-	@Bean
-	@Override
-	public UserDetailsService userDetailsService() {
-		UserDetails user =
-				User.withDefaultPasswordEncoder()
-						.username("user")
-						.password("p")
-						.roles("USER")
-						.build();
-		UserDetails user2 =
-				User.withDefaultPasswordEncoder()
-						.username("user2")
-						.password("p")
-						.roles("USER2")
-						.build();
-		return new InMemoryUserDetailsManager(user,user2);
-	}
+  @Override
+  protected void configure(HttpSecurity http) throws Exception {
+    http
+        .authorizeRequests()
+        .antMatchers("/", "/home").permitAll()
+        .anyRequest().authenticated()
+        .and()
+        .formLogin()
+        .loginPage("/login")
+        .permitAll()
+        .and()
+        .logout()
+        .permitAll();
+  }
+
+  @Bean //@Bean作用在方法上，声明当前方法的返回值是一个 Bean
+  @Override
+  public AuthenticationManager authenticationManagerBean() throws Exception {
+    return super.authenticationManagerBean();
+  }
+
+  @Bean
+  @Override
+  public UserDetailsService userDetailsService() {
+    UserDetails user =
+        User.withDefaultPasswordEncoder()
+            .username("user")
+            .password("p")
+            .roles("USER")
+            .build();
+    UserDetails user2 =
+        User.withDefaultPasswordEncoder()
+            .username("user2")
+            .password("p")
+            .roles("USER2")
+            .build();
+    return new InMemoryUserDetailsManager(user, user2);
+  }
 }

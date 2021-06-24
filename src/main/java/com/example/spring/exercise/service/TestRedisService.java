@@ -7,13 +7,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class TestRedisService {
 
-    @Autowired
-    private TestRedisDao testRedisDao;
-    public void saveData() {
-        testRedisDao.saveData();
-    }
+  @Autowired
+  private TestRedisDao testRedisDao;
 
-    public String getSaveData() {
-        return testRedisDao.getSaveData();
-    }
+  public void saveData() {
+    testRedisDao.saveData();
+  }
+
+  public String getSaveData() {
+    return testRedisDao.getSaveData();
+  }
 }

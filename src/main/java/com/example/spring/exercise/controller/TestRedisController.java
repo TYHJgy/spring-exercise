@@ -9,18 +9,19 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.xml.ws.soap.Addressing;
 
 @RestController
-@RequestMapping(path="/testRedis")
+@RequestMapping(path = "/testRedis")
 public class TestRedisController {
 
-    @Autowired
-    private TestRedisService testRedisService;
+  @Autowired
+  private TestRedisService testRedisService;
 
-    @GetMapping("save")
-    public void testRedis(){
-        testRedisService.saveData();
-    }
-    @GetMapping("get")
-    public String testRedis_get(){
-        return testRedisService.getSaveData();
-    }
+  @GetMapping("save")
+  public void testRedis() {
+    testRedisService.saveData();
+  }
+
+  @GetMapping("get")
+  public String testRedis_get() {
+    return testRedisService.getSaveData();
+  }
 }

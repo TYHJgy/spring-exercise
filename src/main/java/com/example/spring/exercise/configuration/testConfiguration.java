@@ -10,11 +10,12 @@ import org.springframework.stereotype.Component;
 @EnableConfigurationProperties(YamlConfig.class)
 @Data
 public class testConfiguration {
-    @Autowired
-    private YamlConfig yamlConfig;
 
-    public String getString(){
-        return yamlConfig.getString();
-    }
+  @Autowired
+  private YamlConfig yamlConfig;
+
+  public String getString() {
+    return yamlConfig.getString();
+  }
 
 }

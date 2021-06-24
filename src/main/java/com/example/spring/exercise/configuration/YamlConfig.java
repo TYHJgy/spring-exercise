@@ -10,12 +10,12 @@ import java.util.List;
 
 @Data
 @Configuration
-@ConfigurationProperties(prefix="my")
+@ConfigurationProperties(prefix = "my")
 public class YamlConfig {
 
-    private List<String> servers;
+  private List<String> servers;
 
-    public String getString(){
-        return "getString";
-    }
+  public String getString() {
+    return "getString";
+  }
 }
