@@ -1,8 +1,11 @@
 my:
   servers:
-    - devexamplecom2
-    - anotherexamplecom3
+    - yml1
+    - yml2
 
+  config:
+    name3:
+      year: 18
 
 spring:
   datasource:
@@ -10,3 +13,5 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
+  jackson:
+    default-property-inclusion: NON_EMPTY
