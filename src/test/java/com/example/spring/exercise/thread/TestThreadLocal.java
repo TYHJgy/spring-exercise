@@ -1,15 +1,16 @@
 package com.example.spring.exercise.thread;
 
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+/**
+ * 测试ThreadLocal.
+ * ThreadLocal中填充的变量只属于当前线程，该变量对其他线程而言是隔离的，是当前线程独有的变量.
+ * 常用方法get、set、remove
+ */
 public class TestThreadLocal {
   //定义一个存储线程id的threadLocal副本
   private ThreadLocal<Long> threadId = new ThreadLocal<>();
   //定义一个存储线程name的threadLocal副本
   private ThreadLocal<String> threadName = new ThreadLocal<>();
-
-
 
   public static void main(String[] args) throws InterruptedException {
     final TestThreadLocal test = new TestThreadLocal();
@@ -35,6 +36,10 @@ public class TestThreadLocal {
 
     System.out.println("main线程的id：" + test.threadId.get());
     System.out.println("main线程的Name:" + test.threadName.get());
+
+    /*移除线程本地变量*/
+    test.threadId.remove();
+    test.threadName.remove();
   }
 
 }
