@@ -1,4 +1,4 @@
-package com.example.spring.exercise.domain;
+package com.example.spring.exercise.dao.entity;
 
 import lombok.Data;
 @Data

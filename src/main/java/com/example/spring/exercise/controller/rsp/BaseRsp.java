@@ -1,5 +1,6 @@
 package com.example.spring.exercise.controller.rsp;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 /**

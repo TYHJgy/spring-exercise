@@ -4,11 +4,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ExerciseApplicationTestEquals {
+class TestEquals {
     final int I = 0;
     @Test
     void contextLoads() {
-        System.out.println(ExerciseApplicationTestEquals.class+"----"+"123");
+        System.out.println(TestEquals.class+"----"+"123");
 
         String x = "string";
         String y = "string";

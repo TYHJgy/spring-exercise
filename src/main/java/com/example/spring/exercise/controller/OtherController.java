@@ -3,7 +3,7 @@ package com.example.spring.exercise.controller;
 
 import static java.lang.System.*;
 
-import com.example.spring.exercise.domain.Task;
+import com.example.spring.exercise.dao.entity.Task;
 import java.util.Date;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -1,6 +1,6 @@
 package com.example.spring.exercise.dao;
 
-import com.example.spring.exercise.domain.User;
+import com.example.spring.exercise.dao.entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

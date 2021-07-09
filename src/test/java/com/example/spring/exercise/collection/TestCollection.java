@@ -1,5 +1,7 @@
 package com.example.spring.exercise.collection;
 
+
+import com.example.spring.exercise.log.logger;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import sun.misc.DoubleConsts;
 
 /**
  * JAVA中有许多的集合，常用的有List(ArrayList/LinkedList)，Set(HashSet/TreeSet)，Queue，Map(HashMap/TreeMap)
@@ -76,10 +79,17 @@ class TestCollection {
   void testLinkedList2() {
     List<Integer> list = new LinkedList<>();
     list.add(0);
-    list.add(20);
-    LOGGER(list.size());
-    LOGGER(list.get(0));
-    LOGGER(list.get(1));
+    list.add(2);
+    list.add(4);
+    list.add(6);
+//    LOGGER(list.size());
+//    LOGGER(list.get(0));
+//    LOGGER(list.get(1));
+    list.forEach(
+        i -> {
+          LOGGER(i);
+        }
+    );
   }
 
   /**
@@ -135,5 +145,52 @@ class TestCollection {
     sites.remove("Taobao"); // 删除元素，删除成功返回 true，否则为 false
     System.out.println("删除后:" + sites);
     System.out.println("集合大小:" + sites.size()); // 计算大小
+  }
+
+
+
+
+  /**
+   * 两个对象的 hashCode()相同，则equals()也一定相同吗.
+   */
+  @Test
+  void testHashCode(){
+    String str1 = "通话";
+    String str2 = "重地";
+    System.out.println(String.format("str1：%d | str2：%d",  str1.hashCode(),str2.hashCode()));
+    System.out.println(String.format("str1.length：%d | str2.length：%d",  str1.length(),str2.length()));
+    long round = myround(-1.5);
+    logger.info(round);
+  }
+
+  private long myround(double a) {
+    long longBits = Double.doubleToRawLongBits(a);
+
+    logger.info(longBits);
+    long biasedExp = (longBits & DoubleConsts.EXP_BIT_MASK)
+        >> (DoubleConsts.SIGNIFICAND_WIDTH - 1);
+    long shift = (DoubleConsts.SIGNIFICAND_WIDTH - 2
+        + DoubleConsts.EXP_BIAS) - biasedExp;
+    if ((shift & -64) == 0) { // shift >= 0 && shift < 64
+      // a is a finite number such that pow(2,-64) <= ulp(a) < 1
+      long r = ((longBits & DoubleConsts.SIGNIF_BIT_MASK)
+          | (DoubleConsts.SIGNIF_BIT_MASK + 1));
+      if (longBits < 0) {
+        r = -r;
+      }
+      // In the comments below each Java expression evaluates to the value
+      // the corresponding mathematical expression:
+      // (r) evaluates to a / ulp(a)
+      // (r >> shift) evaluates to floor(a * 2)
+      // ((r >> shift) + 1) evaluates to floor((a + 1/2) * 2)
+      // (((r >> shift) + 1) >> 1) evaluates to floor(a + 1/2)
+      return ((r >> shift) + 1) >> 1;
+    } else {
+      // a is either
+      // - a finite number with abs(a) < exp(2,DoubleConsts.SIGNIFICAND_WIDTH-64) < 1/2
+      // - a finite number with ulp(a) >= 1 and hence a is a mathematical integer
+      // - an infinity or NaN
+      return (long) a;
+    }
   }
 }

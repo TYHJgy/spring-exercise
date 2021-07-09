@@ -1,27 +1,25 @@
 package com.example.spring.exercise.controller;
 
-import com.example.spring.exercise.service.TestRedisService;
 import javax.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.xml.ws.soap.Addressing;
 
 @RestController
 @RequestMapping(path="/testRedis")
 public class RedisController {
 
     @Resource
-    private TestRedisService testRedisService;
+    private StringRedisTemplate stringRedisTemplate;
 
-    @GetMapping("save")
-    public void testRedis(){
-        testRedisService.saveData();
+
+    @GetMapping("saveString")
+    public void saveString(){
+        stringRedisTemplate.opsForValue().set("test1","ttteeesssttt");
     }
-    @GetMapping("get")
-    public String testRedis_get(){
-        return testRedisService.getSaveData();
+    @GetMapping("getString")
+    public String getString(){
+        return stringRedisTemplate.opsForValue().get("test1");
     }
 }
