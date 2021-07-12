@@ -1,4 +1,4 @@
-package com.example.spring.exercise.configuration;
+package com.example.spring.exercise.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +10,9 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/**
+ * swagger 配置文件.
+ */
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
@@ -25,7 +28,6 @@ public class SwaggerConfig {
         .apiInfo(apiInfo())
         .select()
         .apis(RequestHandlerSelectors.basePackage("com.example.spring.exercise.controller")) //这里写的是API接口所在的包位置
-
         .paths(PathSelectors.any())
         .build();
   }

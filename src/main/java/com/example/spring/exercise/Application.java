@@ -1,7 +1,6 @@
 package com.example.spring.exercise;
 
-import com.example.spring.exercise.configuration.WebAppConfiguration;
-import com.spring4all.swagger.EnableSwagger2Doc;
+import com.example.spring.exercise.config.WebAppConfiguration;
 import org.springframework.boot.Banner;
 import org.springframework.boot.ExitCodeGenerator;
 import org.springframework.boot.SpringApplication;

@@ -1,7 +1,10 @@
 package com.example.spring.exercise.controller;
 
+import io.swagger.annotations.Api;
 import java.util.List;
 import lombok.Data;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,11 +36,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @author gy
  * @since 2021-5-26 14:53:16 *
  */
+
+@Api(tags = "获取配置信息示例接口")
 @RestController
 @RequestMapping("/config")
 @ConfigurationProperties(prefix = "my.config") // 前缀为"my.config"的配置.
 @Data
 public class ConfigurationController {
+  private Logger logger = LoggerFactory.getLogger(ConfigurationController.class);
 
   /** 配置文件中无"my.config.name"，结果为null. */
   private String name;

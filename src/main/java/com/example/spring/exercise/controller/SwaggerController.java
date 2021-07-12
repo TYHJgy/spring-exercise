@@ -9,6 +9,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SwaggerController {
 
+  private Logger logger = LoggerFactory.getLogger(SwaggerController.class);
   /**
    * POST请求demo.
    *
@@ -37,8 +40,9 @@ public class SwaggerController {
   })
   @PostMapping("/testSwagger")
   public AddUserParamRsp testSwagger(
-      @ApiParam(name = "新增用户参数1", value = "新增用户参数2", required = true) @RequestBody
-          AddUserParamRsp addUserParamRsp) {
+      @ApiParam(name = "addUserParamRsp", value = "新增用户参数", required = true)
+      @RequestBody AddUserParamRsp addUserParamRsp) {
+    logger.info("this is testSwagger(POST)");
     return addUserParamRsp;
   }
 
@@ -62,6 +66,7 @@ public class SwaggerController {
   })
   @GetMapping("/testSwagger")
   public String testSwagger(@RequestParam String id) {
+    logger.info("this is testSwagger(GET)");
     return id;
   }
 }

@@ -1,4 +1,4 @@
-package com.example.spring.exercise.configuration;
+package com.example.spring.exercise.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

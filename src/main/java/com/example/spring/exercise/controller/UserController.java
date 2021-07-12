@@ -1,105 +1,108 @@
 package com.example.spring.exercise.controller;
 
+import com.example.spring.exercise.controller.rsp.BaseRsp;
 import com.example.spring.exercise.dao.entity.User;
-import com.example.spring.exercise.enums.TestEnum;
-import com.example.spring.exercise.enums.TestEnum2;
-import com.example.spring.exercise.enums.TestEnum3;
 import com.example.spring.exercise.service.UserService;
-import javax.annotation.Resource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
+import io.swagger.annotations.Api;
 import java.util.List;
+import javax.annotation.Resource;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
-/**
- *
- *
- *
- */
+/** 用户管理接口. */
+@Api(tags = "用户管理接口")
 @RestController
-@RequestMapping(path="/user")
+@RequestMapping(path = "/user")
 public class UserController {
-    private final static Logger LOGGER = LoggerFactory.getLogger(UserController.class);
-    private UserService userService;
+  @Resource private UserService userService;
 
-    public UserService getUserService() {
-        return userService;
-    }
-    @Resource
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
-    //示例：http://localhost:8003/user?userId=1
-    @GetMapping(path = "")//, defaultValue = "3"
-    public ResponseEntity getUserByUserId(@RequestParam(value = "userId",defaultValue = "1") String userId){
-        LOGGER.info("getUserByUserId+"+userId);
-        if(userId!=""){
+  /**
+   * 获取user.
+   *
+   * @param userId userId
+   * @return User
+   */
+  @GetMapping(path = "")
+  public BaseRsp<User> getUserByUserId(
+      @RequestParam(value = "userId", defaultValue = "1") String userId) {
+    return BaseRsp.success(userService.getUserByUserId(userId));
+  }
 
-            User user = userService.getUserByUserId(userId);
-            user.equals(user);
-            return new ResponseEntity(user,HttpStatus.OK);
-        }else{
-            List<User> users = userService.getAllUser();
-            return new ResponseEntity(users,HttpStatus.BAD_REQUEST);
-        }
-    }
-    @GetMapping(path = "/testEnum")
-    public TestEnum  testEnum(){
-        for (TestEnum we : TestEnum.values()) {
-            LOGGER.info("TestEnum:"+ we.toString());
-        }
-        for (TestEnum2 we : TestEnum2.values()) {
-            LOGGER.info("TestEnum2:"+ we.toString()+ " "+we.getName()+ " "+we.getYear());
-        }
-        for (TestEnum3 we : TestEnum3.values()) {
-            LOGGER.info("TestEnum3:"+ we.getName());
-        }
-        return TestEnum.BLUE;
-    }
-    //{userId}和String userId中userId,要匹配
-    //示例：http://localhost:8003/user/1
-    @GetMapping("/{userId}")
-    public User getUserByUserId3(@PathVariable String userId){
-        LOGGER.info("getUserByUserId3");
-        return userService.getUserByUserId(userId);
-    }
-    @GetMapping(path="all")
-    public List<User> getAllUser(){
-        return userService.getAllUser();
-    }
+  /**
+   * 获取user.
+   *
+   * @param userId userId
+   * @return User
+   */
+  @GetMapping("/{userId}")
+  public BaseRsp<User> getUserByUserId3(@PathVariable String userId) {
+    return BaseRsp.success(userService.getUserByUserId(userId));
+  }
 
-    @RequestMapping("/{userId}")
-    public User getUserByUserId2(@PathVariable String userId){
-        LOGGER.info("getUserByUserId2");
-        return userService.getUserByUserId(userId);
-    }
+  /**
+   * 获取所有user.
+   *
+   * @return List<User>
+   */
+  @GetMapping(path = "all")
+  public BaseRsp<List<User>> getAllUser() {
+    return BaseRsp.success(userService.getAllUser());
+  }
 
-    @PostMapping("")
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity addUser(@RequestBody User user) {
-        userService.insertUserTotTab(user);
-        return new ResponseEntity( HttpStatus.OK);
-    }
-    //登录-从数据库读取信息验证
-    @PostMapping("/testLogin")
-    public ResponseEntity testLogin(@RequestParam("username") String username,@RequestParam("password") String password) {
-        LOGGER.info("enter testLogin");
-        //@RequestBody String username,@RequestBody String password
-        LOGGER.info(username);
-        LOGGER.info(password);
-        return new ResponseEntity( HttpStatus.OK);
-    }
-    @PutMapping("")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void updateUserbyId(@RequestBody User user){
-        userService.updateUserbyId(user);
-    }
+  /**
+   * 获取user.
+   *
+   * @param userId userId
+   * @return User
+   */
+  @RequestMapping("/{userId}")
+  public BaseRsp<User> getUserByUserId2(@PathVariable String userId) {
+    return BaseRsp.success(userService.getUserByUserId(userId));
+  }
 
-    @DeleteMapping("/{userId}")
-    public void deleteUserByUid(@PathVariable String userId){
-        userService.deleteUserByUid(userId);
-    }
+  /**
+   * 添加user.
+   *
+   * @param user user
+   * @return BaseRsp
+   */
+  @PostMapping("")
+  public BaseRsp<Void> addUser(@RequestBody User user) {
+    userService.insertUserTotTab(user);
+    return BaseRsp.success();
+  }
+
+  /**
+   * 修改user.
+   *
+   * @param user user
+   * @return BaseRsp
+   */
+  @PutMapping("")
+  @ResponseStatus(HttpStatus.CREATED)
+  public BaseRsp<Void> updateUserbyId(@RequestBody User user) {
+    userService.updateUserbyId(user);
+    return BaseRsp.success();
+  }
+
+  /**
+   * 删除user.
+   *
+   * @param userId userId
+   * @return BaseRsp
+   */
+  @DeleteMapping("/{userId}")
+  public BaseRsp<Void> deleteUserByUid(@PathVariable String userId) {
+    userService.deleteUserByUid(userId);
+    return BaseRsp.success();
+  }
 }

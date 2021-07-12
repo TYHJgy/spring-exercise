@@ -1,12 +1,15 @@
 package com.example.spring.exercise.service;
 
 import com.example.spring.exercise.aop.Action;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AopByAnnotationService {
-    @Action(name = "注解式拦截的add操作")
+    private Logger logger = LoggerFactory.getLogger(AopByAnnotationService.class);
+    @Action(name = "add操作")
     public void add() {
-        System.out.println("AopByAnnotationService.add()");
+        logger.info("执行add方法");
     }
 }
